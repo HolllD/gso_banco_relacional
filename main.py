@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import names
+from faker import Faker
 
 app = Flask(__name__)
 
@@ -11,7 +12,12 @@ def root_path():
 
 @app.route("/pessoa/random")
 def random_person():
-    print("temp")
+    name = names.get_full_name()
+    birthday = Faker().date_between(
+        start_date='-18y', end_date='+10y'
+    )
+
+    return {'name': name, 'birthday': birthday}
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='43333')
