@@ -1,3 +1,4 @@
 Flask==2.1
 names==0.3
 faker==13.11.1
+mysql-connector-python==8.0.29
