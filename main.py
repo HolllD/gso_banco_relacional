@@ -3,8 +3,22 @@ import names
 from faker import Faker
 import mysql.connector
 
-def insert_person(nome, birthday):
-    mydb = mysql.connector
+def insert_person(name, birthday):
+    mydb = mysql.connector.connect(
+        user='aluno',
+        password='aluno123',
+        database='gso'
+    )
+
+    mycursor = mydb.cursor()
+
+    values = (name, birthday)
+
+    mycursor.execute(
+        'INSERT INTO Pessoa (nome, nascimento) VALUES (%s, %s)', values
+    )
+
+    mydb.commit()
 
 app = Flask(__name__)
 
@@ -27,6 +41,8 @@ def random_person():
     }
 
     print(name, birthday)
+
+    insert_person(name, birthday.strftime("%y-%m-%d"))
 
     return jsonify(response)
 

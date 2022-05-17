@@ -1,0 +1,1 @@
+curl http://localhost:4333/pessoa/random -Method POST
